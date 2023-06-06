@@ -4,18 +4,18 @@ namespace App\Dto;
 
 class ProductDto
 {
-    private int $abstract_product_id;
+    private int $category_id;
     private string $name;
 
     /**
      * Create a new DTO instance.
      *
-     * @param int $abstract_product_id
+     * @param int $category_id
      * @param string $name
      */
-    public function __construct(int $abstract_product_id, string $name)
+    public function __construct(int $category_id, string $name)
     {
-        $this->abstract_product_id = $abstract_product_id;
+        $this->category_id = $category_id;
         $this->name = $name;
     }
 
@@ -26,18 +26,18 @@ class ProductDto
      */
     public function getAbstractProductId(): int
     {
-        return $this->abstract_product_id;
+        return $this->category_id;
     }
 
     /**
      * Set the value of the property.
      *
-     * @param int $abstract_product_id
+     * @param int $category_id
      * @return void
      */
-    public function setAbstractProductId(int $abstract_product_id): void
+    public function setAbstractProductId(int $category_id): void
     {
-        $this->abstract_product_id = $abstract_product_id;
+        $this->category_id = $category_id;
     }
 
     /**

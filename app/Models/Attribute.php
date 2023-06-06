@@ -20,11 +20,11 @@ class Attribute extends Model
     ];
 
     /**
-     * Get the abstract products that belong to the attribute.
+     * Get the categories that belong to the attribute.
      *
      * @return BelongsToMany
      */
-    public function abstractProducts(): BelongsToMany
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Attribute::class);
     }

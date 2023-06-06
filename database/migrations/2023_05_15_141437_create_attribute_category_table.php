@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttributeAbstractProductTable extends Migration
+class CreateAttributeCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateAttributeAbstractProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('attribute_abstract_product', function (Blueprint $table) {
+        Schema::create('attribute_category', function (Blueprint $table) {
             $table->id();
             $table->foreignId('attribute_id')->constrained();
-            $table->foreignId('abstract_product_id')->constrained();
+            $table->foreignId('category_id')->constrained();
             $table->timestamps();
         });
     }

@@ -21,13 +21,13 @@ class Product extends Model
     ];
 
     /**
-     * Get the abstract product that owns the product.
+     * Get the category that owns the product.
      *
      * @return BelongsTo
      */
-    public function abstractProduct(): BelongsTo
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(AbstractProduct::class);
+        return $this->belongsTo(Category::class);
     }
 
     /**

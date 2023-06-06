@@ -2,8 +2,13 @@
 
 namespace App\Dto;
 
-class AbstractProductDto
+class CategoryDto
 {
+    /**
+     * The name of the property.
+     *
+     * @var string
+     */
     private string $name;
 
     /**
@@ -35,5 +40,12 @@ class AbstractProductDto
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    public function toArray(string $name): array
+    {
+        return $categoryArray = [
+            'name' => $this->name,
+        ];
     }
 }
