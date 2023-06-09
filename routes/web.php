@@ -23,6 +23,7 @@ Auth::routes();
 
 Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');
+    Route::get('/categories/{category}/delete', [CategoryController::class, 'delete'])->name('categories.delete');
     Route::resource('categories', CategoryController::class);
 });
 

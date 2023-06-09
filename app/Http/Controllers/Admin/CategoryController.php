@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Dto\CategoryDto;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Categories\CreateCategoryRequest;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
@@ -49,14 +48,13 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param CreateCategoryRequest $request
+     * @param CategoryRequest $request
      * @return RedirectResponse
      */
-    public function store(CreateCategoryRequest $request): RedirectResponse
+    public function store(CategoryRequest $request): RedirectResponse
     {
-        $data = $request->validated();
-        $categoryDto = new CategoryDto($data['name']);
-        $categoryArray = $categoryDto->toArray($data['name']);
+        $categoryDto = new CategoryDto($request['name']);
+        $categoryArray = $categoryDto->toArray($categoryDto->getName());
         $categoryService = $this->categoryService->store($categoryArray);
         return redirect()->route('admin.categories.index');
     }
@@ -64,45 +62,62 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Category $abstractProduct
-     * @return \Illuminate\Http\Response
+     * @param Category $category
+     * @return View
      */
-    public function show(Category $abstractProduct)
+    public function show(Category $category): View
     {
-        //
+        return view('admin.categories.show', compact('category'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Category $abstractProduct
-     * @return \Illuminate\Http\Response
+     * @param Category $category
+     * @return View
      */
-    public function edit(Category $abstractProduct)
+    public function edit(Category $category): View
     {
-        //
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Category $abstractProduct
-     * @return \Illuminate\Http\Response
+     * @param CategoryRequest $request
+     * @param Category $category
+     * @return RedirectResponse
      */
-    public function update(Request $request, Category $abstractProduct)
+    public function update(CategoryRequest $request, Category $category): RedirectResponse
     {
-        //
+        $categoryId = $category->id;
+        $categoryDto = new CategoryDto($request['name']);
+        $categoryArray = $categoryDto->toArray($categoryDto->getName());
+        $categoryService = $this->categoryService->update($categoryArray, $categoryId);
+        return redirect()->route('admin.categories.show', ['category' => $categoryId]);
+    }
+
+    /**
+     * Show the form for deleting the specified resource.
+     *
+     * @param Category $category
+     * @return View
+     */
+    public function delete(Category $category): View
+    {
+        return view('admin.categories.delete', compact('category'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Category $abstractProduct
-     * @return \Illuminate\Http\Response
+     * @param Category $category
+     * @return RedirectResponse
      */
-    public function destroy(Category $abstractProduct)
+    public function destroy(Category $category): RedirectResponse
     {
-        //
+        $categoryId = $category->id;
+        $categoryService = $this->categoryService->destroy($categoryId);
+        return redirect()->route('admin.categories.index');
     }
 }
