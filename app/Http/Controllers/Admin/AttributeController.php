@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Attribute;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class AttributeController extends Controller
 {
@@ -21,7 +22,7 @@ class AttributeController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     *
      */
     public function create()
     {
@@ -42,12 +43,12 @@ class AttributeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Attribute  $attribute
-     * @return \Illuminate\Http\Response
+     * @param  Attribute  $attribute
+     * @return View
      */
-    public function show(Attribute $attribute)
+    public function show(Attribute $attribute): View
     {
-        //
+        return view('admin.attributes.show', compact('attribute'));
     }
 
     /**
