@@ -5,8 +5,6 @@ namespace App\Dto;
 class CategoryDto
 {
     /**
-     * The name of the property.
-     *
      * @var string
      */
     private string $name;
@@ -42,9 +40,14 @@ class CategoryDto
         $this->name = $name;
     }
 
-    public function toArray(string $name): array
+    /**
+     * Get the array of property attributes.
+     *
+     * @return array[]
+     */
+    public function toArray(): array
     {
-        return $categoryArray = [
+        return [
             'name' => $this->name,
         ];
     }

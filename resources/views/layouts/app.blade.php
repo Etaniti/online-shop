@@ -10,7 +10,7 @@
     <title>Интернет-магазин</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,6 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    @livewireStyles
 </head>
 <body>
 <div id="app" class="content">
@@ -94,5 +95,6 @@
         @yield('content')
     </main>
 </div>
+@livewireScripts
 </body>
 </html>

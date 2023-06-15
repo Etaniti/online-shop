@@ -21,7 +21,7 @@ class Category extends Model
     ];
 
     /**
-     * Get the attributes that belong to the abstract product.
+     * Get the attributes that belong to the category.
      *
      * @return BelongsToMany
      */
@@ -31,7 +31,7 @@ class Category extends Model
     }
 
     /**
-     * Get the product instances that belong to abstract product.
+     * Get the product instances that belong to the category.
      *
      * @return HasMany
      */

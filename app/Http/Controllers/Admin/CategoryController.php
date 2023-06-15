@@ -54,8 +54,7 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request): RedirectResponse
     {
         $categoryDto = new CategoryDto($request['name']);
-        $categoryArray = $categoryDto->toArray($categoryDto->getName());
-        $categoryService = $this->categoryService->store($categoryArray);
+        $categoryService = $this->categoryService->store($categoryDto);
         return redirect()->route('admin.categories.index');
     }
 
@@ -92,8 +91,7 @@ class CategoryController extends Controller
     {
         $categoryId = $category->id;
         $categoryDto = new CategoryDto($request['name']);
-        $categoryArray = $categoryDto->toArray($categoryDto->getName());
-        $categoryService = $this->categoryService->update($categoryArray, $categoryId);
+        $categoryService = $this->categoryService->update($categoryDto, $categoryId);
         return redirect()->route('admin.categories.show', ['category' => $categoryId]);
     }
 
