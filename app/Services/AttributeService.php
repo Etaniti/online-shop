@@ -13,9 +13,21 @@ class AttributeService
      * @param AttributeDto $attributeDto
      * @return void
      */
-    public function store(AttributeDto $attributeDto): void
+    public function store(AttributeDto $attributeDto): Attribute
     {
-        $attribute = Attribute::create($attributeDto->toArray());
-        $attribute->categories()->attach($attributeDto->getCategoryId());
+        return $attribute = Attribute::create($attributeDto->toArray());
+//        $attribute->categories()->attach($attributeDto->getCategoryId());
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param AttributeDto $attributeDto
+     * @param int $attributeId
+     * @return bool
+     */
+    public function update(AttributeDto $attributeDto, int $attributeId): bool
+    {
+        return Attribute::findOrFail($attributeId)->update($attributeDto->toArray());
     }
 }

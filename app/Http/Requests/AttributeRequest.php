@@ -25,9 +25,13 @@ class AttributeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'string',
-            'max:255',
-            Rule::unique('attributes', 'name')->ignore($this->route('attribute')),
+            'name' => [
+                'string',
+                'max:255',
+                Rule::unique('attributes', 'name')->where(function ($query) {
+                    return $query->where('category_id', request()->route('category'));
+                }),
+            ]
         ];
     }
 }

@@ -5,9 +5,11 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\HomeController;
-use App\Http\Livewire\Attributes\CreateMultipleAttributes;
+use App\Http\Livewire\Attributes\CreateAttributes;
+use App\Http\Livewire\Attributes\UpdateAttributes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Products\CreateProducts;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,10 +34,12 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::resource('categories', CategoryController::class);
 
     // Attributes routes
-    Route::post('/attributes/store', [CreateMultipleAttributes::class, 'store'])->name('attributes.store');
-    Route::resource('categories.attributes', AttributeController::class)->except('store')->shallow();
+    Route::post('/categories/{category}/attributes', [CreateAttributes::class, 'store'])->name('attributes.store');
+    Route::patch('/attributes/{attribute}', [UpdateAttributes::class, 'update'])->name('attributes.update');
+    Route::resource('categories.attributes', AttributeController::class)->except('create', 'store')->shallow();
 
     // Products routes
-    Route::resource('categories.products', ProductController::class)->shallow();
+    Route::post('/categories/{category}/products', [CreateProducts::class, 'store'])->name('products.store');
+    Route::resource('categories.products', ProductController::class)->except('create', 'store')->shallow();
 });
 

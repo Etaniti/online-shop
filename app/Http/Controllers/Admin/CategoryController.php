@@ -54,7 +54,7 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request): RedirectResponse
     {
         $categoryDto = new CategoryDto($request['name']);
-        $categoryService = $this->categoryService->store($categoryDto);
+        $this->categoryService->store($categoryDto);
         return redirect()->route('admin.categories.index');
     }
 
@@ -91,7 +91,7 @@ class CategoryController extends Controller
     {
         $categoryId = $category->id;
         $categoryDto = new CategoryDto($request['name']);
-        $categoryService = $this->categoryService->update($categoryDto, $categoryId);
+        $this->categoryService->update($categoryDto, $categoryId);
         return redirect()->route('admin.categories.show', ['category' => $categoryId]);
     }
 
@@ -115,7 +115,7 @@ class CategoryController extends Controller
     public function destroy(Category $category): RedirectResponse
     {
         $categoryId = $category->id;
-        $categoryService = $this->categoryService->destroy($categoryId);
+        $this->categoryService->destroy($categoryId);
         return redirect()->route('admin.categories.index');
     }
 }

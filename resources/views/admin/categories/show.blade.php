@@ -11,29 +11,18 @@
                     <a href="{{ route('admin.categories.delete', ['category' => $category->id]) }}"
                        class="text-danger ms-2">Удалить</a>
                 </div>
-                <div class="mb-4">
-                    <h4 class="row text-decoration-underline ms-1 mb-4">Характеристики</h4>
-                    @foreach($category->attributes as $attribute)
-                        <h5 class="mt-3">
-                            <a href="{{ route('admin.attributes.show', ['attribute' => $attribute->id]) }}" class="link-secondary">
-                                {{ $attribute->name }}
-                            </a>
-                        </h5>
-                    @endforeach
-                </div>
-                @livewire('attributes.create-multiple-attributes', ['category' => $category])
-                <div class="mt-5">
-                    <h4 class="text-decoration-underline">Товары</h4>
+                @livewire('attributes.create-attributes', ['category' => $category])
+                <div class="mt-5 mb-4">
+                    <h4 class="row text-decoration-underline ms-1 mb-4">Товары</h4>
                     @foreach($category->products as $product)
                         <h5 class="mt-3">
-                            <a href="{{ route('admin.products.show', ['product' => $product->id]) }}">
+                            <a href="{{ route('admin.products.show', ['product' => $product->id]) }}" class="link-primary">
                                 {{ $product->name }}
                             </a>
                         </h5>
                     @endforeach
-                    <a href="{{ route('admin.categories.products.create', ['category' => $category]) }}"
-                       class="btn btn-outline-primary px-5 py-2 mt-3">Добавить</a>
                 </div>
+                @livewire('products.create-products', ['category' => $category])
             </div>
         </div>
     </div>

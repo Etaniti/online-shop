@@ -8,12 +8,17 @@ use App\Services\AttributeService;
 use Illuminate\View\View;
 use Livewire\Component;
 
-class CreateMultipleAttributes extends Component
+class CreateAttributes extends Component
 {
     /**
      * @var bool
      */
-    public bool $showInputs = false;
+    public bool $showCreateInputs = false;
+
+    /**
+     * @var bool
+     */
+    public bool $showUpdateInputs = false;
 
     /**
      * @var Category
@@ -39,7 +44,7 @@ class CreateMultipleAttributes extends Component
      */
     public function render(): View
     {
-        return view('livewire.attributes.create-multiple-attributes');
+        return view('livewire.attributes.create-attributes');
     }
 
     /**
@@ -52,7 +57,7 @@ class CreateMultipleAttributes extends Component
     {
         $data = $this->validate();
         $attributeDto = new AttributeDto($data['name'], $this->category['id']);
-        $attributeService = $attributeService->store($attributeDto);
+        $attributeService->store($attributeDto);
         $this->dispatchBrowserEvent('refresh-page');
     }
 }
