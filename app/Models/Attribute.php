@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Attribute extends Model
 {
@@ -20,12 +20,12 @@ class Attribute extends Model
     ];
 
     /**
-     * Get the abstract products that belong to the attribute.
+     * Get the category that owns the attribute.
      *
-     * @return BelongsToMany
+     * @return BelongsTo
      */
-    public function abstractProducts(): BelongsToMany
+    public function categories(): BelongsTo
     {
-        return $this->belongsToMany(Attribute::class);
+        return $this->belongsTo(Category::class);
     }
 }

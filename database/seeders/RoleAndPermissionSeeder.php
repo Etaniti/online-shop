@@ -15,7 +15,7 @@ class RoleAndPermissionSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $permissionsData = [
             ['name' => Permissions::CAN_CREATE_ABSTRACT_PRODUCTS],

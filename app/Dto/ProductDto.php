@@ -4,19 +4,33 @@ namespace App\Dto;
 
 class ProductDto
 {
-    private int $abstract_product_id;
+    /**
+     * @var int
+     */
+    private int $category_id;
+
+    /**
+     * @var string
+     */
     private string $name;
+
+    /**
+     * @var string
+     */
+    private string $producer;
 
     /**
      * Create a new DTO instance.
      *
-     * @param int $abstract_product_id
+     * @param int $category_id
      * @param string $name
+     * @param string $producer
      */
-    public function __construct(int $abstract_product_id, string $name)
+    public function __construct(int $category_id, string $name, string $producer)
     {
-        $this->abstract_product_id = $abstract_product_id;
+        $this->category_id = $category_id;
         $this->name = $name;
+        $this->producer = $producer;
     }
 
     /**
@@ -24,20 +38,20 @@ class ProductDto
      *
      * @return int
      */
-    public function getAbstractProductId(): int
+    public function getCategoryId(): int
     {
-        return $this->abstract_product_id;
+        return $this->category_id;
     }
 
     /**
      * Set the value of the property.
      *
-     * @param int $abstract_product_id
+     * @param int $category_id
      * @return void
      */
-    public function setAbstractProductId(int $abstract_product_id): void
+    public function setCategoryId(int $category_id): void
     {
-        $this->abstract_product_id = $abstract_product_id;
+        $this->category_id = $category_id;
     }
 
     /**
@@ -59,5 +73,40 @@ class ProductDto
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * Get the value of the property.
+     *
+     * @return string
+     */
+    public function getProducer(): string
+    {
+        return $this->producer;
+    }
+
+    /**
+     * Set the value of the property.
+     *
+     * @param string $producer
+     * @return void
+     */
+    public function setProducer(string $producer): void
+    {
+        $this->producer = $producer;
+    }
+
+    /**
+     * Get the array of property attributes.
+     *
+     * @return array[]
+     */
+    public function toArray(): array
+    {
+        return [
+            'category_id' => $this->category_id,
+            'name' => $this->name,
+            'producer' => $this->producer,
+        ];
     }
 }

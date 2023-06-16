@@ -2,8 +2,11 @@
 
 namespace App\Dto;
 
-class AbstractProductDto
+class CategoryDto
 {
+    /**
+     * @var string
+     */
     private string $name;
 
     /**
@@ -35,5 +38,17 @@ class AbstractProductDto
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * Get the array of property attributes.
+     *
+     * @return array[]
+     */
+    public function toArray(): array
+    {
+        return [
+            'name' => $this->name,
+        ];
     }
 }
