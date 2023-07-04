@@ -31,6 +31,7 @@ class CategoryRequest extends FormRequest
                 'max:255',
                 Rule::unique('categories', 'name')->ignore($this->route('category')),
             ],
+            'parent_id' => ['nullable', 'integer'],
         ];
     }
 }

@@ -16,8 +16,13 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'name', 'parent_id',
     ];
+
+    public function subcategories(): HasMany
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
 
     /**
      * Get the attributes that belong to the category.

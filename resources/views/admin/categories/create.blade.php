@@ -11,7 +11,7 @@
 
                         <div class="mb-4 row">
                             <label for="name" class="col-form-label fw-bold">Название</label>
-                            <input type="text" class="form-control" name="name">
+                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                             @error('name')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror

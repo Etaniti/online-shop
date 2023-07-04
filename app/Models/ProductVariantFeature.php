@@ -16,7 +16,7 @@ class ProductVariantFeature extends Model
      * @var array
      */
     protected $fillable = [
-        'value',
+        'product_variant_id', 'attribute_id', 'value',
     ];
 
     /**
@@ -27,5 +27,15 @@ class ProductVariantFeature extends Model
     public function productVariant(): BelongsTo
     {
         return $this->belongsTo(ProductVariant::class);
+    }
+
+    /**
+     * Get the attribute that owns the product variant feature.
+     *
+     * @return BelongsTo
+     */
+    public function attribute(): BelongsTo
+    {
+        return $this->belongsTo(Attribute::class);
     }
 }

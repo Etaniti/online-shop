@@ -1,6 +1,6 @@
 <div class="container">
     <div class="d-flex flex-column justify-content-start">
-        <div class="mb-4">
+        <div class="mb-1">
             <div class="d-flex flex-sm-row align-items-center mb-3">
                 <h4 class="text-decoration-underline me-2">Характеристики</h4>
                 <button wire:click="$set('showUpdateInputs', true)"
@@ -23,7 +23,7 @@
         </div>
         <div>
             @if(!$showCreateInputs && !$showUpdateInputs)
-                <button wire:click="$set('showCreateInputs', true)" class="row btn btn-outline-primary px-5 py-2">
+                <button wire:click="$set('showCreateInputs', true)" class="row btn btn-outline-primary px-5 py-2 mt-3">
                     Добавить
                 </button>
             @endif
@@ -34,7 +34,7 @@
             <div>
                 @if($showCreateInputs)
                     <div class="mb-4 row">
-                        <input type="text" class="form-control" wire:model="name" placeholder="Название">
+                        <input type="text" class="form-control" wire:model="name" placeholder="Название" value="{{ old('name') }}">
                         @error('name')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -42,7 +42,7 @@
                             <button id="saveButton" type="submit" class="btn btn-primary col-4 py-2 me-2 mt-3">
                                 Сохранить
                             </button>
-                            <button wire:click="$set('showCreateInputs', false)" type="submit"
+                            <button wire:click="$set('showCreateInputs', false)"
                                     class="btn btn-outline-secondary col-4 py-2 mt-3">Отмена
                             </button>
                         </div>

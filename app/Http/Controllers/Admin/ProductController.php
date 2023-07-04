@@ -5,11 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Dto\ProductDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
-use App\Models\Category;
 use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -17,16 +15,16 @@ class ProductController extends Controller
     /**
      * @var ProductService
      */
-    private ProductService $productService;
+    private ProductService $service;
 
     /**
      * Instantiate a new controller instance.
      *
-     * @param ProductService $productService
+     * @param ProductService $service
      */
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $service)
     {
-        $this->productService = $productService;
+        $this->service = $service;
     }
 
     /**
@@ -42,37 +40,30 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param int $category_id
-     * @return View
+     * @return \Illuminate\Http\Response
      */
-    public function create(int $category_id): View
+    public function create()
     {
-        $category = Category::findOrFail($category_id);
-        return view('admin.products.create', compact('category'));
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ProductRequest  $request
+     * @param ProductRequest $request
      * @return RedirectResponse
      */
     public function store(ProductRequest $request): RedirectResponse
     {
-        $productDto = new ProductDto(
-            $request['category_id'],
-            $request['name'],
-            $request['producer'],
-        );
-
-        $productService = $this->productService->store($productDto);
+        $dto = new ProductDto($request['category_id'], $request['name'], $request['producer']);
+        $this->service->store($dto);
         return redirect()->route('admin.categories.show', ['category' => $request['category_id']]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  Product  $product
+     * @param Product $product
      * @return View
      */
     public function show(Product $product): View
@@ -83,34 +74,49 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return View
      */
-    public function edit(Product $product)
+    public function edit(Product $product): View
     {
-        //
+        return view('admin.products.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param ProductRequest $request
+     * @param Product $product
+     * @return RedirectResponse
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product): RedirectResponse
     {
-        //
+        $dto = new ProductDto($request['category_id'], $request['name'], $request['producer']);
+        $this->service->update($dto, $product->id);
+        return redirect()->route('admin.products.show', ['product' => $product->id]);
+    }
+
+    /**
+     * Show the form for deleting the specified resource.
+     *
+     * @param Product $product
+     * @return View
+     */
+    public function delete(Product $product): View
+    {
+        return view('admin.products.delete', compact('product'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return RedirectResponse
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product): RedirectResponse
     {
-        //
+        $categoryId = $product->category_id;
+        $this->service->delete($product->id);
+        return redirect()->route('admin.categories.show', ['category' => $categoryId]);
     }
 }

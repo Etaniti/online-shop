@@ -10,13 +10,20 @@ class CategoryDto
     private string $name;
 
     /**
+     * @var int|null
+     */
+    private ?int $parent_id;
+
+    /**
      * Create a new DTO instance.
      *
      * @param string $name
+     * @param int|null $parent_id
      */
-    public function __construct(string $name)
+    public function __construct(string $name, ?int $parent_id)
     {
         $this->name = $name;
+        $this->parent_id = $parent_id;
     }
 
     /**
@@ -41,6 +48,26 @@ class CategoryDto
     }
 
     /**
+     * Get the value of the property.
+     *
+     * @return int|null
+     */
+    public function getParentId(): ?int
+    {
+        return $this->parent_id;
+    }
+
+    /**
+     * Set the value of the property.
+     *
+     * @param int|null $parent_id
+     */
+    public function setParentId(?int $parent_id): void
+    {
+        $this->parent_id = $parent_id;
+    }
+
+    /**
      * Get the array of property attributes.
      *
      * @return array[]
@@ -49,6 +76,7 @@ class CategoryDto
     {
         return [
             'name' => $this->name,
+            'parent_id' => $this->parent_id,
         ];
     }
 }

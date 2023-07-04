@@ -26,6 +26,7 @@ class AttributeRequest extends FormRequest
     {
         return [
             'name' => [
+                'required',
                 'string',
                 'max:255',
                 Rule::unique('attributes', 'name')->where(function ($query) {

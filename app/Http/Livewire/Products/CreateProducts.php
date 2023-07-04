@@ -54,11 +54,11 @@ class CreateProducts extends Component
      * @param ProductService $productService
      * @return void
      */
-    public function store(ProductService $productService): void
+    public function store(ProductService $service): void
     {
         $data = $this->validate();
-        $productDto = new ProductDto($this->category['id'], $data['name'], $data['producer']);
-        $productService->store($productDto);
+        $dto = new ProductDto($this->category['id'], $data['name'], $data['producer']);
+        $service->store($dto);
         $this->dispatchBrowserEvent('refresh-page');
     }
 }

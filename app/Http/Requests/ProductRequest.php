@@ -25,13 +25,13 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'category_id' => ['required', 'integer'],
             'name' => [
                 'required',
                 'string',
                 'max:255',
                 Rule::unique('products', 'name')->ignore($this->route('product')),
             ],
-            'category_id' => ['required', 'integer'],
             'producer' => ['required', 'string', 'max:255'],
         ];
     }

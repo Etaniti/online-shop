@@ -4,13 +4,41 @@ namespace App\Dto;
 
 class ProductVariantDto
 {
+    /**
+     * @var int
+     */
     private int $product_id;
+
+    /**
+     * @var string
+     */
     private string $name;
+
+    /**
+     * @var string
+     */
     private string $description;
+
+    /**
+     * @var array
+     */
+    private array $photos;
+
+    /**
+     * @var string
+     */
     private string $sku;
+
+    /**
+     * @var int
+     */
     private int $article;
-    private int $barcode;
+
+    /**
+     * @var float
+     */
     private float $price;
+
 
     /**
      * Create a new DTO instance.
@@ -18,19 +46,19 @@ class ProductVariantDto
      * @param int $product_id
      * @param string $name
      * @param string $description
+     * @param array $photos
      * @param string $sku
      * @param int $article
-     * @param int $barcode
      * @param float $price
      */
-    public function __construct(int $product_id, string $name, string $description, string $sku, int $article, int $barcode, float $price)
+    public function __construct(int $product_id, string $name, string $description, array $photos, string $sku, int $article, float $price)
     {
         $this->product_id = $product_id;
         $this->name = $name;
         $this->description = $description;
+        $this->photos = $photos;
         $this->sku = $sku;
         $this->article = $article;
-        $this->barcode = $barcode;
         $this->price = $price;
     }
 
@@ -97,6 +125,26 @@ class ProductVariantDto
     /**
      * Get the value of the property.
      *
+     * @return array
+     */
+    public function getPhotos(): array
+    {
+        return $this->photos;
+    }
+
+    /**
+     * Set the value of the property.
+     *
+     * @param array $photos
+     */
+    public function setPhotos(array $photos): void
+    {
+        $this->photos = $photos;
+    }
+
+    /**
+     * Get the value of the property.
+     *
      * @return string
      */
     public function getSku(): string
@@ -137,26 +185,6 @@ class ProductVariantDto
     /**
      * Get the value of the property.
      *
-     * @return int
-     */
-    public function getBarcode(): int
-    {
-        return $this->barcode;
-    }
-
-    /**
-     * Set the value of the property.
-     *
-     * @param int $barcode
-     */
-    public function setBarcode(int $barcode): void
-    {
-        $this->barcode = $barcode;
-    }
-
-    /**
-     * Get the value of the property.
-     *
      * @return float
      */
     public function getPrice(): float
@@ -172,5 +200,22 @@ class ProductVariantDto
     public function setPrice(float $price): void
     {
         $this->price = $price;
+    }
+
+    /**
+     * Get the array of property attributes.
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'product_id' => $this->product_id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'sku' => $this->sku,
+            'article' => $this->article,
+            'price' => $this->price,
+        ];
     }
 }

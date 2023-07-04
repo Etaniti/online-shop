@@ -50,14 +50,14 @@ class CreateAttributes extends Component
     /**
      * Store a newly created resource in storage.
      *
-     * @param AttributeService $attributeService
+     * @param AttributeService $service
      * @return void
      */
-    public function store(AttributeService $attributeService): void
+    public function store(AttributeService $service): void
     {
         $data = $this->validate();
-        $attributeDto = new AttributeDto($data['name'], $this->category['id']);
-        $attributeService->store($attributeDto);
+        $dto = new AttributeDto($data['name'], $this->category['id']);
+        $service->store($dto);
         $this->dispatchBrowserEvent('refresh-page');
     }
 }

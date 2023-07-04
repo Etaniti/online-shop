@@ -8,7 +8,7 @@
                 @method('PATCH')
                 <div class="card px-4 py-3 mt-5 mb-5">
                     <div class="card-body">
-                        <h3 class="card-title mb-4">Редактирование категории "{{ $category->name }}"</h3>
+                        <h3 class="card-title mb-4">Редактирование категории<br>"{{ $category->name }}"</h3>
 
                         <div class="mb-4 row">
                             <label for="name" class="col-form-label fw-bold">Название</label>

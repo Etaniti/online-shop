@@ -10,24 +10,24 @@ class CategoryService
     /**
      * Store a newly created resource in storage.
      *
-     * @param CategoryDto $categoryDto
+     * @param CategoryDto $dto
      * @return Category
      */
-    public function store(CategoryDto $categoryDto): Category
+    public function store(CategoryDto $dto): Category
     {
-        return Category::create($categoryDto->toArray());
+        return Category::create($dto->toArray());
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param CategoryDto $categoryDto
+     * @param CategoryDto $dto
      * @param int $categoryId
      * @return bool
      */
-    public function update(CategoryDto $categoryDto, int $categoryId): bool
+    public function update(CategoryDto $dto, int $categoryId): bool
     {
-        return Category::findOrFail($categoryId)->update($categoryDto->toArray());
+        return Category::findOrFail($categoryId)->update($dto->toArray());
     }
 
     /**

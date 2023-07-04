@@ -10,11 +10,34 @@ class ProductService
     /**
      * Store a newly created resource in storage.
      *
-     * @param ProductDto $productDto
+     * @param ProductDto $dto
      * @return Product
      */
-    public function store(ProductDto $productDto): Product
+    public function store(ProductDto $dto): Product
     {
-        return Product::create($productDto->toArray());
+        return $product = Product::create($dto->toArray());
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param ProductDto $dto
+     * @param int $productId
+     * @return bool
+     */
+    public function update(ProductDto $dto, int $productId): bool
+    {
+        return Product::findOrFail($productId)->update($dto->toArray());
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $productId
+     * @return bool
+     */
+    public function delete(int $productId): bool
+    {
+        return Product::findOrFail($productId)->destroy($productId);
     }
 }

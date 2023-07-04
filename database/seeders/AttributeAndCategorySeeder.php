@@ -14,27 +14,68 @@ class AttributeAndCategorySeeder extends Seeder
      */
     public function run(): void
     {
+        $category = Category::create([
+            'name' => 'Компьютерная техника',
+            'parent_id' => null,
+        ]);
+
         $attributeData = [
-            ['name' => 'Длина'],
-            ['name' => 'Ширина'],
-            ['name' => 'Высота'],
-            ['name' => 'Материал'],
+            ['name' => 'Линейка'],
+            ['name' => 'Тип'],
+            ['name' => 'Операционная система'],
+            ['name' => 'Диагональ экрана'],
+            ['name' => 'Разрешение экрана'],
+            ['name' => 'Процессор'],
+            ['name' => 'Количество ядер'],
+            ['name' => 'Тактовая частота'],
+            ['name' => 'Объем оперативной памяти'],
+            ['name' => 'Тип видеокарты'],
+            ['name' => 'Емкость SSD'],
         ];
 
         $category = Category::create([
-            'name' => 'Столы',
+            'name' => 'Ноутбуки',
+            'parent_id' => 1,
         ]);
 
         $category->attributes()->createMany($attributeData);
 
         $category = Category::create([
-            'name' => 'Стулья',
+            'name' => 'Персональные компьютеры',
+            'parent_id' => 1,
         ]);
 
         $category->attributes()->createMany($attributeData);
 
         $category = Category::create([
-            'name' => 'Диваны',
+            'name' => 'Комплектующие',
+            'parent_id' => null,
+        ]);
+
+        $attributeData = [
+            ['name' => 'Тип'],
+            ['name' => 'Назначение'],
+            ['name' => 'Емкость'],
+            ['name' => 'Интерфейс передачи данных'],
+        ];
+
+        $category = Category::create([
+            'name' => 'Жесткие диски, SSD',
+            'parent_id' => 4,
+        ]);
+
+        $category->attributes()->createMany($attributeData);
+
+        $attributeData = [
+            ['name' => 'Тип'],
+            ['name' => 'Назначение'],
+            ['name' => 'Емкость'],
+            ['name' => 'Интерфейс передачи данных'],
+        ];
+
+        $category = Category::create([
+            'name' => 'Оперативная память',
+            'parent_id' => 4,
         ]);
 
         $category->attributes()->createMany($attributeData);

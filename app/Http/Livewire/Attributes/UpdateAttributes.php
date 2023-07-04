@@ -20,6 +20,11 @@ class UpdateAttributes extends Component
     public bool $showInputs = false;
 
     /**
+     * @var bool
+     */
+    public bool $showDeleteForm = false;
+
+    /**
      * @var Category
      */
     public Category $category;
@@ -57,25 +62,28 @@ class UpdateAttributes extends Component
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Update the specified resource in storage.
      *
-     * @param AttributeService $attributeService
+     * @param AttributeService $service
      * @return void
      * @throws ValidationException
      */
-    public function update(AttributeService $attributeService): void
+    public function update(AttributeService $service): void
     {
-        $data = Validator::make(['name' => $this->name], [
-            'name' => [
-                'string',
-                'max:255',
-                Rule::unique('attributes', 'name')->where(function ($query) {
-                    return $query->where('category_id', $this->category['id']);
-                }),
-            ]
-        ])->validate();
-        $attributeDto = new AttributeDto($data['name'], $this->category['id']);
-        $attributeService->update($attributeDto, $this->attribute);
-        $this->dispatchBrowserEvent('refresh-page');
+        if (!empty($this->name)) {
+            $data = Validator::make(['name' => $this->name], [
+                'name' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    Rule::unique('attributes', 'name')->where(function ($query) {
+                        return $query->where('category_id', $this->category['id']);
+                    }),
+                ]
+            ])->validate();
+            $dto = new AttributeDto($data['name'], $this->category['id']);
+            $service->update($dto, $this->attribute);
+            $this->dispatchBrowserEvent('refresh-page');
+        }
     }
 }

@@ -33,7 +33,7 @@ class Permissions
     public const CAN_DELETE_PRODUCT_VARIANTS = 'create-product-variants';
 
     /**
-     * Permissions for actions on product variants features.
+     * Permissions for actions on product variant features.
      */
     public const CAN_CREATE_PRODUCT_VARIANT_FEATURES = 'create-product-variants';
     public const CAN_UPDATE_PRODUCT_VARIANT_FEATURES = 'update-product-variants';
